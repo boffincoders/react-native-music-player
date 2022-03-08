@@ -40,8 +40,7 @@ const TRACK_PLAYER_CONTROLS_OPTS = {
     TrackPlayer.CAPABILITY_SKIP_TO_PREVIOUS,
   ],
 };
-
-export default function PlayerScreen() {
+export default function PlayerScreen({songId}) {
   let rotateValueHolder = new Animated.Value(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const slider = useRef(null);
@@ -84,7 +83,6 @@ export default function PlayerScreen() {
       TrackPlayer.addEventListener(PLAYBACK_TRACK_CHANGED, async e => {
         console.log('song ended', e);
         const trackId = (await TrackPlayer.getCurrentTrack()) - 1; //get the current id
-        console.log('track id', trackId, 'index', index.current);
         if (trackId !== index.current) {
           setSongIndex(trackId);
           isItFromUser.current = false;
@@ -116,7 +114,6 @@ export default function PlayerScreen() {
     return () => {
       scrollX.removeAllListeners();
       TrackPlayer.destroy();
-
       // exitPlayer();
     };
   }, [scrollX]);
@@ -124,7 +121,7 @@ export default function PlayerScreen() {
   // change the song when index changes
   useEffect(() => {
     if (isPlayerReady.current && isItFromUser.current) {
-      TrackPlayer.skip(songs[songIndex].id)
+      TrackPlayer.skip(songs[songIndex].id || songId)
         .then(_ => {
           console.log('changed track');
         })

@@ -25,11 +25,11 @@ export default function Controller({onNext, onPrv, cdController}) {
   const returnPlayBtn = () => {
     switch (isPlaying.current) {
       case 'playing':
-        return <Icon color="#fff" name="pause" size={45} />;
+        return <Icon color="black" name="pause" size={45} />;
       case 'paused':
-        return <Icon color="#fff" name="play-arrow" size={45} />;
+        return <Icon color="black" name="play-arrow" size={45} />;
       default:
-        return <ActivityIndicator size={45} color="#fff" />;
+        return <ActivityIndicator size={45} color="black" />;
     }
   };
 
@@ -44,13 +44,13 @@ export default function Controller({onNext, onPrv, cdController}) {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onPrv}>
-        <Icon color="#fff" name="skip-previous" size={45} />
+        <Icon color="black" name="skip-previous" size={45} />
       </TouchableOpacity>
       <TouchableOpacity onPress={onPlayPause}>
         {returnPlayBtn()}
       </TouchableOpacity>
       <TouchableOpacity onPress={onNext}>
-        <Icon color="#fff" name="skip-next" size={45} />
+        <Icon color="black" name="skip-next" size={45} />
       </TouchableOpacity>
     </View>
   );
